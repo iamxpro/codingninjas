@@ -11,17 +11,17 @@ if (!function_exists('genres_taxonomy')) :
 
     function genres_taxonomy() {
         $labels = array(
-            'name' => 'Жанры',
-            'singular_name' => 'Жанр',
-            'search_items' => 'Поиск Жанра',
-            'all_items' => 'Все Жанры',
-            'parent_item' => 'Родительский Жанр:',
-            'edit_item' => 'Редактировать Жанр:',
-            'update_item' => 'Обновить Жанр',
-            'add_new_item' => 'Добавить новый Жанр',
-            'new_item_name' => 'Новый Жанр имя',
-            'menu_name' => 'Жанры',
-            'view_item' => 'Посмотреть Жанры'
+            'name' => __('Genres'),
+            'singular_name' => __('Genre'),
+            'search_items' => __('Search Genre'),
+            'all_items' => __('All Genres'),
+            'parent_item' => __('Parent Genre:'),
+            'edit_item' => __('Edit Genre:'),
+            'update_item' => __('Update Genre'),
+            'add_new_item' => __('Add New Genre'),
+            'new_item_name' => __('New Genre name'),
+            'menu_name' => __('Genres'),
+            'view_item' => __('View Genres')
         );
 
         $args = array(
@@ -41,19 +41,19 @@ if (!function_exists('films_tag_taxonomy')) :
 
     function films_tag_taxonomy() {
         $labels = array(
-            'name' => 'Теги',
-            'singular_name' => 'Тег',
-            'search_items' => 'Поиск Теги',
-            'popular_items' => ( 'Популярные Теги' ),
+            'name' => __('Tags'),
+            'singular_name' => __('Tag'),
+            'search_items' => __('Search Tags'),
+            'popular_items' => __('Featured Tags'),
             'parent_item' => null,
             'parent_item_colon' => null,
-            'all_items' => 'Все Теги',
-            'edit_item' => 'Редактировать Тег:',
-            'update_item' => 'Обновить Тег',
-            'add_new_item' => 'Добавить новый Тег',
-            'new_item_name' => 'Новый Тег имя',
-            'menu_name' => 'Теги',
-            'view_item' => 'Посмотреть Теги'
+            'all_items' => __('All Tags'),
+            'edit_item' => __('Edit Tag:'),
+            'update_item' => __('Update Tag'),
+            'add_new_item' => __('Add New Tag'),
+            'new_item_name' => __('New Tag Name'),
+            'menu_name' => __('Tags'),
+            'view_item' => __('View Tags')
         );
 
         $args = array(
@@ -73,18 +73,18 @@ if (!function_exists('register_films')) :
 
     function register_films() {
         $labels = array(
-            'name' => 'Фильмы',
-            'singular_name' => 'Фильм',
-            'add_new' => 'Добавить новый Фильм',
-            'add_new_item' => 'Добавить новый Фильм',
-            'edit_item' => 'Редактировать Фильм',
-            'new item' => 'Новый Фильм',
-            'all_items' => 'Все Фильмы',
-            'view_item' => 'Посмотреть Фильм',
-            'search_items' => 'Поиск Фильмы',
-            'not_found' => 'Не найдено ни одного фильма',
-            'not_found_in_trash' => 'В корзине нет фильмов',
-            'menu_name' => 'Фильмы'
+            'name' => __('Films'),
+            'singular_name' => __('Film'),
+            'add_new' => __('Add New Film'),
+            'add_new_item' => __('Add New Film'),
+            'edit_item' => __('Edit Film'),
+            'new item' => __('New Film'),
+            'all_items' => __('All Films'),
+            'view_item' => __('To see a Film'),
+            'search_items' => __('Search Film'),
+            'not_found' => __('No Films found'),
+            'not_found_in_trash' => __('There are no Films in the Trash.'),
+            'menu_name' => __('Films')
         );
 
         $args = array(
@@ -192,7 +192,6 @@ function rei_add_to_cart_button($content) {
     if ($post->post_type !== 'films') {
         return $content;
     }
-
     ob_start();
     ?>
     <form action="" method="post">
@@ -208,14 +207,14 @@ function films_meta_box_markup($object) {
     wp_nonce_field(basename(__FILE__), "meta-box-nonce");
     ?>
     <div>
-        <label for="meta-box-film">Цена: <br>
+        <label for="meta-box-film">Price: <br>
             <input name="meta-box-film" type="text" value="<?php echo get_post_meta($object->ID, "price", true); ?>"></label>
     </div>
     <?php
 }
 
 function add_film_meta_box() {
-    add_meta_box("film-meta-box", "Стоимость Фильма", "films_meta_box_markup", "films", "side", "high", null);
+    add_meta_box("film-meta-box", "The cost of the film", "films_meta_box_markup", "films", "side", "high", null);
 }
 
 add_action("add_meta_boxes", "add_film_meta_box");
@@ -255,8 +254,8 @@ add_action("save_post", "save_film_meta_box", 10, 3);
 function skype_registation_fields() {
     ?>
     <p class="form-row form-row-wide">
-        <label for="reg_billing_skype"><?php _e('Skype', 'woocommerce'); ?> <span class="required">*</span></label></label>
-    <input type="text" class="input-text" name="billing_skype" id="reg_billing_skype" value="<?php esc_attr_e($_POST['billing_skype']); ?>" />
+        <label for="billing_skype"><?php _e('Skype', 'woocommerce'); ?> <span class="required">*</span></label></label>
+    <input type="text" class="input-text" name="billing_skype" id="billing_skype" value="<?php echo (isset($_POST['billing_skype']) && empty($_POST['billing_skype'])) ? esc_attr_e($_POST['billing_skype']) : ''; ?>" />
     </p>
     <div class="clear"></div>
     <?php
